@@ -1,11 +1,9 @@
 from bad_words import *
 import pandas as pd
+import importlib.resources
 import joblib
 import numpy as np
-
-import sys
-sys.path.append('../../data_generation')
-import word 
+from decodable_words_generator import word
 
 
 def load_data():
@@ -18,7 +16,7 @@ def load_data():
         FileNotFoundError: If the specified file does not exist.
     """  
     try:
-        return joblib.load("../../data_generation/processed/words-20000-decodable-2000-undecodable.pickle")
+        return joblib.load(importlib.resources.files("decodable_words_generator").joinpath("processed/words-20000-decodable-2000-undecodable.pickle"))
     except FileNotFoundError as e:
         raise FileNotFoundError(f"Data file not found: {e}")
 
