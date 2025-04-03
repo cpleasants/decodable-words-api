@@ -67,5 +67,7 @@ bad_words = set([
     "sin",
     "sins",
     "poop",
-    "poops"
+    "poops",
+    "meth",
+    "glock"
 ])
