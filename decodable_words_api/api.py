@@ -1,4 +1,4 @@
-import filter_words
+from decodable_words_api import filter_words
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware

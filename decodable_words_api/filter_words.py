@@ -1,4 +1,4 @@
-from bad_words import *
+from decodable_words_api.bad_words import *
 import pandas as pd
 import importlib.resources
 import joblib

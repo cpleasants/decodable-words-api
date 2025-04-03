@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "decodable_words_api"
+version = "0.1.0"
+description = "A simple Python API that takes a set of criteria and generates a list of words based on that criteria, using decodable_words_generator's dictionary."
+readme = "readme.md"
+authors = [{ name = "Chris Pleasants", email = "chris.j.pleasants@gmail.com" }]
+dependencies = [
+    "fastapi",
+    "pydantic",
+    "pandas",
+    "joblib",
+    "numpy",
+    "decodable_words_generator @ https://github.com/cpleasants/decodable-words-generator/releases/download/v0.1.0/decodable_words_generator-0.1.0-py3-none-any.whl"
+]
+requires-python = ">=3.6"
+license = { text = "AGPL-3.0-or-later" }
