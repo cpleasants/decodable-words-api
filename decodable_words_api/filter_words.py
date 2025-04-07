@@ -3,7 +3,7 @@ import pandas as pd
 import importlib.resources
 import joblib
 import numpy as np
-from decodable_words_generator import word
+from decodable_words_generator.phonemes import PHONEME_SETS
 
 
 def load_data():
@@ -16,21 +16,21 @@ def load_data():
         FileNotFoundError: If the specified file does not exist.
     """  
     try:
-        return joblib.load(importlib.resources.files("decodable_words_generator").joinpath("processed/words-20000-decodable-2000-undecodable.pickle"))
+        return joblib.load(importlib.resources.files("decodable_words_generator").joinpath("processed/10000-words.pickle"))
     except FileNotFoundError as e:
         raise FileNotFoundError(f"Data file not found: {e}")
 
 def get_phoneme_bitmaps(p_set:str, letter_list:list):
     # TODO: consider abstracting this in order to be used with Word's implementation
-    bitmap = np.zeros(len(word.PHONEME_SETS[p_set]), dtype = np.int8)
-    for i, letter_part in enumerate(word.PHONEME_SETS[p_set]):
+    bitmap = np.zeros(len(PHONEME_SETS[p_set]), dtype = np.int8)
+    for i, letter_part in enumerate(PHONEME_SETS[p_set]):
         if letter_part in letter_list:
             bitmap[i] = 1
     return bitmap
 
 def parse_input(input_data:str):
     # parsed = json.loads(input_data)
-    input_data.update({p_set : get_phoneme_bitmaps(p_set, input_data[p_set]) for p_set in word.PHONEME_SETS})
+    input_data.update({p_set : get_phoneme_bitmaps(p_set, input_data[p_set]) for p_set in PHONEME_SETS})
     input_data["sight_words"] = set(input_data["sight_words"])
     return input_data
 
@@ -39,7 +39,7 @@ def filt(row: pd.Series, parsed_input: dict) -> bool:
     Filters dictionary_df rows based on whether all letters/features in parsed_input
     are sufficient to construct the word in the given row.
     """
-    # Check if each component in parsed_input is sufficient
+    # Check that ONLY allowed letters/digraphs/blends are included by comparing bitmaps 
     checks = [
         (parsed_input["hard_consonants"] >= row["hard_consonants"]).all(),
         (parsed_input["soft_consonants"] >= row["soft_consonants"]).all(),

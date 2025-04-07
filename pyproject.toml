@@ -14,7 +14,7 @@ dependencies = [
     "pandas",
     "joblib",
     "numpy",
-    "decodable_words_generator @ https://github.com/cpleasants/decodable-words-generator/releases/download/v0.1.0/decodable_words_generator-0.1.0-py3-none-any.whl"
+    "decodable_words_generator @ https://github.com/cpleasants/decodable-words-generator/releases/download/v0.2.0/decodable_words_generator-0.2.0-py3-none-any.whl"
 ]
 requires-python = ">=3.6"
 license = { text = "AGPL-3.0-or-later" }
